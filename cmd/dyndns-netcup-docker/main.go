@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/Hentra/dyndns-netcup-go/internal"
+	"github.com/Axolord/dyndns-netcup-go/internal"
 )
 
 const (

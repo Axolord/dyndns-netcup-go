@@ -3,7 +3,7 @@ package internal
 import (
 	"strconv"
 
-	"github.com/Hentra/dyndns-netcup-go/pkg/netcup"
+	"github.com/Axolord/dyndns-netcup-go/pkg/netcup"
 )
 
 // DNSConfiguratorService represents a service that will update the
