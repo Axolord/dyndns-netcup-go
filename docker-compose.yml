@@ -1,6 +1,6 @@
 services:
   dyn-dns:
-    image: ghcr.io/axolord/dyndns-netcup-go
+    image: ghcr.io/axolord/dyndns-netcup-go:1
     container_name: Netcup-Dyn-DNS
     environment:
       - INTERVAL=300

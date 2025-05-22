@@ -6,10 +6,7 @@
 
 Dyndns client for the netcup DNS API written in go.
 Forked and improved from [Hentra/dyndns-netcup-go](https://github.com/Hentra/dyndns-netcup-go).
-Not related to netcup GmbH. It is **heavily** inspired by 
-[this](https://github.com/stecklars/dynamic-dns-netcup-api) 
-project which might be also a good solution for your 
-dynamic DNS needs. 
+Not related to netcup GmbH. 
 
 ## Table of Contents
 <!-- vim-markdown-toc GFM -->
@@ -56,9 +53,15 @@ description (in German) on how you get those.
 ### Docker compose example using secret files
 
 You need to create config.yml file in the same directory as the docker-compose.yml file, take a look at [config/example.yml](config/example.yml) for an example.
-For a Docker setup do not save your secrets (api key, etc.) directly in the config.yml, but rather as environment variables or [docker compose secret files](https://docs.docker.com/compose/how-tos/use-secrets/), as shown below!
+
+> [!WARNING]
+> For a Docker setup do not save your secrets (api key, etc.) directly in the config.yml, but rather as environment variables or [docker compose secret files](https://docs.docker.com/compose/how-tos/use-secrets/), as shown below!
+
 For secrets management create three files under `secrets/` with the names `customernr`, `apikey` and `apipassword`, like in the [secrets/](secrets/) directory.
-To further protect the secrets from unauthorized access, make sure it is owned by the user that runs dyndns-netcup-go, being the UID 62534 (see the [Dockerfile](build/package/Dockerfile)] and make it read-only:
+
+> [!TIP]
+> To further protect the secrets from unauthorized access, make sure it is owned by the user that runs dyndns-netcup-go, being the UID 62534 (see the [Dockerfile](build/package/Dockerfile)] and make it read-only:
+
 ```shell
 sudo chown 62534:62534 secrets/*
 sudo chmod 440 secrets/*
@@ -68,7 +71,7 @@ After that setup you can use the following docker-compose.yml as an example, als
 ```compose.yml
 services:
   dyn-dns:
-    image: ghcr.io/hentra/dyndns-netcup-go
+    image: ghcr.io/hentra/dyndns-netcup-go:1
     container_name: Netcup-Dyn-DNS
     environment:
       - INTERVAL=300
@@ -110,7 +113,7 @@ networks:
         -e CUSTOMERNR=111111 \
         -e APIKEY=my-fancy-api-key \
         -e APIPASSWORD=my-fancy-api-pw \
-        ghcr.io/axolord/dyndns-netcup-go
+        ghcr.io/axolord/dyndns-netcup-go:1
 
 This allows you to store the configuration in plain text(e.g. git) and inject the secrets safely from a secret management solution.
 
@@ -130,12 +133,12 @@ This allows you to store the configuration in plain text(e.g. git) and inject th
 
 If you prefer to run the executeable directly without Docker or Podman, you have to build
 the executeable manually.
-I am only partially supporting this setup, since it is inherited from upstream.
 
-If someone wants to help testing/maintaining this way of installation I am happy
-to reseive pull requests!
-But since I am not using it myself, I am not feeling good
-about providing only partially tested executeables.
+> [!IMPORTANT]
+> I am only partially supporting this setup, since it is inherited from upstream.
+> If someone wants to help testing/maintaining this way of installation I am happy to reseive pull requests!
+> But since I am not using it myself, I am not feeling good about providing only partially tested executeables.
+
 With that out of the way, here are the steps:
 
 First, install [Go](https://golang.org/doc/install) as
